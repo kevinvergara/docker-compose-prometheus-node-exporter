@@ -2,6 +2,7 @@ version: "3"
 services:
   prom:
     image: quay.io/prometheus/prometheus:v2.0.0
+    restart: always
     volumes:
       - ./monitor/prometheus.yml:/etc/prometheus/prometheus.yml
     command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
@@ -11,5 +12,6 @@ services:
       - exporter
   exporter:
     image: prom/node-exporter:latest
+    restart: always
     ports:
       - "9111:9100"
